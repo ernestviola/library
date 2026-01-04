@@ -108,3 +108,25 @@ for (let i = 0; i < booksToAdd.length; i++) {
     book.read
   );
 }
+
+const newBookForm = document.getElementById('new__book__form');
+const dialog = document.getElementById('form__dialog');
+const openModalButton = document.getElementById('open__modal');
+openModalButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  dialog.showModal();
+})
+
+newBookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let form = new FormData(newBookForm);
+
+  addBookToLibrary(
+    form.get('book'),
+    form.get('author'),
+    Number(form.get('pages')),
+    form.get('read') === 'on',
+  );
+
+  dialog.close();
+})
