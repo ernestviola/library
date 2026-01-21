@@ -20,6 +20,7 @@
 body {
   line-height: 1.5;
   min-height: 100vh;
+  background-color: rgb(233, 226, 217);
 }
 
 table {
@@ -29,10 +30,20 @@ table {
 }
 
 caption {
-  text-align: left;
-  font-size: 2em;
+  margin: 60px 0px 20px 0px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+caption > span {
+  font-size: 2.5em;
   font-weight: 600;
-  margin: 60px 4px 20px;
+}
+
+.table__caption {
+  display: flex;
+  justify-content: center;
 }
 
 th,
@@ -46,8 +57,17 @@ tr:first-child {
   border-bottom: 1px solid;
 }
 
+tr:nth-child(odd) {
+  background-color: rgb(255, 255, 255);
+}
 tr:nth-child(even) {
-  background-color: rgb(180, 179, 179);
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+.table__header {
+  background-color: rgb(75, 74, 73) !important;
+  color: white;
 }
 
 .books__container {
@@ -62,8 +82,14 @@ tr:nth-child(even) {
   cursor: pointer;
 }
 
-.book__remove > img {
+tr:nth-child(odd) .book__remove > img {
   filter: brightness(0);
+  height: 20px;
+  margin-top: 3px;
+}
+
+tr:nth-child(even) .book__remove > img {
+  filter: brightness(100);
   height: 20px;
   margin-top: 3px;
 }

@@ -147,6 +147,7 @@ bookTitleInput.addEventListener('input', (e) => validateBook(e));
 
 const bookAuthorInput = document.getElementById('author');
 bookAuthorInput.addEventListener('change', (e) => validateAuthor(e));
+bookAuthorInput.addEventListener('input', (e) => validateAuthor(e));
 
 const bookPagesInput = document.getElementById('pages');
 bookPagesInput.addEventListener('change', (e) => validatePages(e));
