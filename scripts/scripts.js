@@ -7,16 +7,16 @@ class Book {
   read;
   uuid = crypto.randomUUID();
   constructor(title, author, pages, read) {
-    if (title == null && title == undefined || typeof title !== 'string') {
+    if ((title == null && title == undefined) || typeof title !== 'string') {
       throw Error('Invalid title');
     }
-    if (author == null && author == undefined || typeof author !== 'string') {
+    if ((author == null && author == undefined) || typeof author !== 'string') {
       throw Error('Invalid author');
     }
-    if (pages == null && pages == undefined || typeof pages !== 'number') {
+    if ((pages == null && pages == undefined) || typeof pages !== 'number') {
       throw Error('Invalid pages');
     }
-    if (read == null && read == undefined || typeof read !== 'boolean') {
+    if ((read == null && read == undefined) || typeof read !== 'boolean') {
       throw Error('Invalid read');
     }
     this.title = title;
@@ -32,12 +32,12 @@ const addBookToLibrary = (title, author, pages, read) => {
 
   // add book to table
   addBookToRow(book);
-}
+};
 
 const addBookToRow = (book) => {
   const books = document.getElementById('books');
   const newRow = document.createElement('tr');
-  let uuid = ''
+  let uuid = '';
   for (key in book) {
     if (key == 'uuid') {
       uuid = book[key];
@@ -54,8 +54,7 @@ const addBookToRow = (book) => {
   removeButton.addEventListener('click', (e) => {
     e.preventDefault();
     removeBookFromLibrary(e.currentTarget.getAttribute('data-uuid'));
-
-  })
+  });
   trashImg.src = 'images/trash.svg';
   removeButtonData.className = 'book__remove__td';
   removeButton.className = 'book__remove';
@@ -64,60 +63,99 @@ const addBookToRow = (book) => {
   removeButtonData.appendChild(removeButton);
   newRow.appendChild(removeButtonData);
   books.appendChild(newRow);
-}
+};
 
 const removeBookFromLibrary = (uuid) => {
-  const index = library.findIndex(book => book.uuid = uuid);
+  const index = library.findIndex((book) => (book.uuid = uuid));
   library.splice(index, 1);
   const tableRow = document.querySelector(`[data-uuid="${uuid}"]`);
   tableRow.remove();
+};
 
-}
+const validateBook = (e) => {
+  const book = e.target;
+  if (book.value.length > 100) {
+    book.setCustomValidity(
+      'The book title is too long! It must be under 100 letters.',
+    );
+  } else {
+    book.setCustomValidity('');
+  }
+  book.reportValidity();
+};
+
+const validateAuthor = (e) => {
+  e.preventDefault();
+  const author = e.target;
+  if (author.value.split(' ').length <= 1) {
+    author.setCustomValidity('Author must contain at least 2 names.');
+  } else {
+    author.setCustomValidity('');
+  }
+  author.reportValidity();
+};
+
+const validatePages = (e) => {
+  e.preventDefault();
+  const pages = e.target;
+  if (pages.value >= 1000000) {
+    pages.setCustomValidity('Pages must be under 1,000,000.');
+  } else {
+    pages.setCustomValidity('');
+  }
+};
 
 const booksToAdd = [
   {
     title: 'The Hobbit',
     author: 'J.R.R Tolkien',
     pages: 295,
-    read: false
+    read: false,
   },
   {
     title: 'Martyr!',
     author: 'Kaveh Akbar',
     pages: 352,
-    read: true
+    read: true,
   },
   {
     title: 'The Hitchhikers Guide to The Galaxy',
     author: 'Douglas Adams',
     pages: 200,
-    read: true
+    read: true,
   },
   {
     title: 'Tuesdays with Morrie',
     author: 'Mitch Albom',
     pages: 192,
-    read: true
-  }
-]
+    read: true,
+  },
+];
 
 for (let i = 0; i < booksToAdd.length; i++) {
-  let book = booksToAdd[i]
-  addBookToLibrary(
-    book.title,
-    book.author,
-    book.pages,
-    book.read
-  );
+  let book = booksToAdd[i];
+  addBookToLibrary(book.title, book.author, book.pages, book.read);
 }
 
 const newBookForm = document.getElementById('new__book__form');
 const dialog = document.getElementById('form__dialog');
 const openModalButton = document.getElementById('open__modal');
+
+const bookTitleInput = document.getElementById('book');
+bookTitleInput.addEventListener('change', (e) => validateBook(e));
+bookTitleInput.addEventListener('input', (e) => validateBook(e));
+
+const bookAuthorInput = document.getElementById('author');
+bookAuthorInput.addEventListener('change', (e) => validateAuthor(e));
+
+const bookPagesInput = document.getElementById('pages');
+bookPagesInput.addEventListener('change', (e) => validatePages(e));
+
 openModalButton.addEventListener('click', (e) => {
   e.preventDefault();
+  document.getElementById('book').focus();
   dialog.showModal();
-})
+});
 
 newBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -133,4 +171,4 @@ newBookForm.addEventListener('submit', (e) => {
   newBookForm.reset();
 
   dialog.close();
-})
+});

@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang='en'>
+<!doctype html>
+<html lang="en">
   <head>
-    <meta charset='UTF-8'>
-    <link rel='stylesheet' href='stylesheets/styles.css'>
-    <script type='text/javascript' src='scripts/scripts.js' defer></script>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="stylesheets/styles.css" />
+    <script type="text/javascript" src="scripts/scripts.js" defer></script>
     <title>Library</title>
   </head>
   <body>
-    <div class='books__container'>
-      <table class='books__table' id='books'>
-        <caption>Library</caption>
+    <div class="books__container">
+      <table class="books__table" id="books">
+        <caption>
+          Library
+        </caption>
         <tr>
           <th>Book</th>
           <th>Author</th>
@@ -18,28 +20,28 @@
           <th></th>
         </tr>
       </table>
-      <button class='add__book' id='open__modal' autofocus>Add +</button>
+      <button class="add__book" id="open__modal" autofocus>Add +</button>
     </div>
-    <dialog id='form__dialog'>
-      <p class='form__title'>New Book</p>
-      <form action='' id='new__book__form'>
-        <div class='form__row'>
-          <label for='book'>Book</label>
-          <input required type='text' id='book' name='book'>
+    <dialog id="form__dialog">
+      <p class="form__title">New Book</p>
+      <form action="" id="new__book__form">
+        <div class="form__row">
+          <label for="book">Book</label>
+          <input required type="text" id="book" name="book" />
         </div>
-        <div class='form__row'>
-          <label for='author'>Author</label>
-          <input required type='text' id='author' name='author'>
+        <div class="form__row">
+          <label for="author">Author</label>
+          <input required type="text" id="author" name="author" />
         </div>
-        <div class='form__row'>
-          <label for='pages'>Pages</label>
-          <input required type='number' id='pages' name='pages'>
+        <div class="form__row">
+          <label for="pages">Pages</label>
+          <input required type="number" id="pages" name="pages" />
         </div>
-        <div class=''>
-          <label for='read'>Read</label>
-          <input type='checkbox' name='read'>
+        <div class="">
+          <label for="read">Read</label>
+          <input type="checkbox" name="read" id="read" />
         </div>
-        <button type='submit'>Save</button>
+        <button type="submit">Save</button>
       </form>
     </dialog>
   </body>
